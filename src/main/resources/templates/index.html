@@ -1,0 +1,41 @@
+<!--Ez a templaitem --->
+
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<div th:replace="fragments/head"></div>
+<body>
+    <h1 class="container">Todo</h1>
+    <form class="formContainer container ml-0" action="/save" method="post">
+        <div class="form-group">
+            <label for="todo_name">Név:</label>
+            <input type="text" id="todo_name" name="todo_name" required>
+        </div>
+        <div class="form-group">
+            <label for="todo_description">Leírás:</label>
+            <input type="text" id="todo_description" name="todo_description">
+        </div>
+        <div class="form-group">
+            <input class="btn btn-primary" type="submit" value="Küldés">
+        </div>
+
+    </form>
+
+<!--tablazatom--->
+<table class="table">
+    <tr>
+        <th>Név</th>
+        <th>Leírás</th>
+    </tr>
+
+    <!--ezek azok az adatok, amiket a contorller nekem visszaadott(ugye a mentettek)-->
+    <tr th:each="todo : ${todos}">
+        <td th:text="${todo.getTitle()}"></td>
+        <td th:text="${todo.getDescription()}">-</td>
+        <td><a th:href="@{/todo(id=${todo.getId()})}">Megnyitás</a></td>
+
+    </tr>
+</table>
+
+
+</body>
+</html>
